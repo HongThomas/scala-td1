@@ -1,8 +1,7 @@
 object statistiques :
 
   def afficheTab(tab: Array[Int]) : Unit =
-    for element <- tab do
-      println(element)
+    println(tab.mkString(" | "))
 
   def indice(tab: Array[Int], v: Int) : Int =
     var estPresent = false
@@ -20,25 +19,34 @@ object statistiques :
       total = total + element
     total
 
-  def effectif(tValeurs: Array[Int], tEffectifs: Int, v: Int) : Int =
-    return 0
+  def effectif(tValeurs: Array[Int], tEffectifs: Array[Int], v: Int) : Int =
+    var effectif = -1
+    for i <- 0 until tValeurs.length
+      if tValeurs(i) == v
+    do
+      effectif = tEffectifs(i)
+    return effectif
+
 
   def main(args:Array[String]) : Unit =
     val temps = Array(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5)
     val effectifs = Array(3, 2, 2, 3, 2, 3, 4, 5, 2, 3, 1)
 
-    println(" ---- Affichage temps ----")
+    println(" Q2 ---- Affichage temps ----")
     afficheTab(temps)
 
-    println(" ---- Affichage effectifs --" +
+    println(" Q2 ---- Affichage effectifs --" +
       "--")
     afficheTab(effectifs)
 
-    println(" ---- Affichage indice ----")
+    println(" Q3 ---- Affichage indice ----")
     println(indice(effectifs, 2))
 
-    println("---- Affichage effectif total ----")
+    println(" Q4 ---- Affichage effectif total ----")
     println(effectifTotal(effectifs))
 
-    println("---- Affichage effectif total ----")
-    println(effectif(temps, effectifTotal(temps), -2))
+    println(" Q5 ---- Affichage effectif d'une valeur ----")
+    println(effectif(temps, effectifs, -2))
+
+    println(" Q6 ---- Effectif cumule croissant ----")
+    println()
