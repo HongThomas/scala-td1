@@ -27,6 +27,12 @@ object statistiques :
       effectif = tEffectifs(i)
     return effectif
 
+  def effectifCumuleCroissant(tValeurs: Array[Int], tEffectifs: Array[Int], v: Int) : Int =
+    var ind = indice(tValeurs, v)
+    var effectif = 0
+
+
+    return 0
 
   def main(args:Array[String]) : Unit =
     val temps = Array(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5)
@@ -49,4 +55,4 @@ object statistiques :
     println(effectif(temps, effectifs, -2))
 
     println(" Q6 ---- Effectif cumule croissant ----")
-    println()
+    println(effectifCumuleCroissant(temps, effectifs, 0))
