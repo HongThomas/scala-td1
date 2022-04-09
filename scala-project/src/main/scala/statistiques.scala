@@ -34,6 +34,13 @@ object statistiques :
       effectif += tEffectifs(i)
     return effectif
 
+  def moyenne(tValeurs: Array[Int], tEffectifs: Array[Int]) : Int =
+    val effectifT = effectifTotal(tEffectifs)
+    var total = 0
+    for i <- 0 until tValeurs.length do
+      total += tValeurs(i)*tEffectifs(i)
+    return total/effectifT
+
   def main(args:Array[String]) : Unit =
     val temps = Array(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5)
     val effectifs = Array(3, 2, 2, 3, 2, 3, 4, 5, 2, 3, 1)
@@ -55,3 +62,6 @@ object statistiques :
 
     println(" Q6 ---- Effectif cumule croissant ----")
     println(effectifCumuleCroissant(temps, effectifs, 0))
+
+    println(" Q7 ---- Moyenne ----")
+    println(moyenne(temps, effectifs))
