@@ -30,9 +30,9 @@ object statistiques :
   def effectifCumuleCroissant(tValeurs: Array[Int], tEffectifs: Array[Int], v: Int) : Int =
     var ind = indice(tValeurs, v)
     var effectif = 0
-
-
-    return 0
+    for i <- 0 until ind do
+      effectif += tEffectifs(i)
+    return effectif
 
   def main(args:Array[String]) : Unit =
     val temps = Array(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5)
@@ -41,8 +41,7 @@ object statistiques :
     println(" Q2 ---- Affichage temps ----")
     afficheTab(temps)
 
-    println(" Q2 ---- Affichage effectifs --" +
-      "--")
+    println(" Q2 ---- Affichage effectifs ----")
     afficheTab(effectifs)
 
     println(" Q3 ---- Affichage indice ----")
