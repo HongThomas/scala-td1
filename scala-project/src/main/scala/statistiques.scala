@@ -29,10 +29,12 @@ object statistiques :
 
   def effectifCumuleCroissant(tValeurs: Array[Int], tEffectifs: Array[Int], v: Int) : Int =
     var ind = indice(tValeurs, v)
+    if ind == -1 then
+      return -1
     var effectif = 0
     for i <- 0 until ind do
       effectif += tEffectifs(i)
-    return effectif
+    effectif
 
   def moyenne(tValeurs: Array[Int], tEffectifs: Array[Int]) : Int =
     val effectifT = effectifTotal(tEffectifs)
@@ -40,6 +42,29 @@ object statistiques :
     for i <- 0 until tValeurs.length do
       total += tValeurs(i)*tEffectifs(i)
     return total/effectifT
+
+  def nIemeValeur(tValeurs: Array[Int], tEffectifs: Array[Int], v: Int) : Int =
+    var total = 0
+    var valeur = 0
+    for i <- 0 until tEffectifs.length
+        j <- 0 until tEffectifs(i)
+      do
+        total += 1
+        if total == v then
+              valeur = tValeurs(i)
+    return valeur
+
+  def mediane(tValeurs: Array[Int], tEffectifs: Array[Int]) : Float =
+    val effectif = effectifTotal(tEffectifs)
+    var mediane = 0
+    if effectif % 2 == 0 then
+      mediane = (nIemeValeur(tValeurs, tEffectifs, effectif/2) + nIemeValeur(tValeurs, tEffectifs, effectif/2 + 1))/2
+    else
+      mediane = nIemeValeur(tValeurs, tEffectifs, (effectif / 2) + 1)
+    return mediane
+
+  def premierQuartile(tValeurs: Array[Int], tEffectifs: Array[Int]) : Int =
+    return nIemeValeur(tValeurs, tEffectifs, (0.25 * effectifTotal(tEffectifs)).toInt)
 
   def main(args:Array[String]) : Unit =
     val temps = Array(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5)
@@ -52,16 +77,32 @@ object statistiques :
     afficheTab(effectifs)
 
     println(" Q3 ---- Affichage indice ----")
-    println(indice(effectifs, 2))
+    assert(indice(effectifs, 2) == 1)
+    assert(indice(effectifs, 10) == -1)
+    println("Test indice OK")
 
     println(" Q4 ---- Affichage effectif total ----")
     println(effectifTotal(effectifs))
 
     println(" Q5 ---- Affichage effectif d'une valeur ----")
-    println(effectif(temps, effectifs, -2))
+    assert(effectif(temps, effectifs, -2) == 3)
+    assert(effectif(temps, effectifs, -10) == -1)
+    println("Test effectif OK")
 
     println(" Q6 ---- Effectif cumule croissant ----")
-    println(effectifCumuleCroissant(temps, effectifs, 0))
+    assert(effectifCumuleCroissant(temps, effectifs, 0) == 12)
+    assert(effectifCumuleCroissant(temps, effectifs, -10) == -1)
+    println("Test effectif cumule croissant OK")
 
     println(" Q7 ---- Moyenne ----")
-    println(moyenne(temps, effectifs))
+    assert(moyenne(temps, effectifs) == 0)
+    println("Test Moyenne OK")
+
+    println("Q8 ---- nIemeValeur ----")
+    println(nIemeValeur(temps, effectifs, 15))
+
+    println("Q9 ---- mediane ----")
+    println(mediane(temps, effectifs))
+
+    println("Q10 ---- premierQuartile ----")
+    println(premierQuartile(temps, effectifs))
