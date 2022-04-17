@@ -1,0 +1,5 @@
+scala-project/.idea/
+scala-project/project/
+scala-project/target/
+scala-project/build.sbt
+scala-project/.bsp
